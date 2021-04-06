@@ -1,0 +1,34 @@
+*{
+    margin:0px;  
+    padding: 0px;
+    font-size: 20px;
+}
+.header{
+      background-color: blue;
+      height: 60px;
+      color: white;
+      font-weight: 800;
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+.wrap{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+.frame{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 10px;
+  }
+form{
+      margin: 10px;
+}
+h2{
+    text-align: center;
+}
+

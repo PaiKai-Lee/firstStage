@@ -1,0 +1,47 @@
+*{
+    margin:0px;  
+    padding: 0px;
+    font-size: 20px;
+  }
+  .header{
+      background-color: blue;
+      height: 60px;
+      color: white;
+      font-weight: 800;
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .wrap{
+      display: flex;
+      flex-direction: column;
+  }
+  .frame{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  .item{
+      margin: 4px 0;
+  }
+  .former{
+      display: flex;
+      flex-direction: column;
+  }
+  .former label{
+      margin: 4px 0;
+  }
+  .former input{
+      font-size: 20px;
+  }
+  .dash{
+      size:2px;
+      color: darkgrey;
+      width: 20%;
+      margin: 20px auto;
+  }
+  #btn{
+      width: 100px;
+      margin:auto;
+  }

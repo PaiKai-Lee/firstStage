@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>歡迎光臨登入系統</title>
+        <link rel="stylesheet" href="/static/index.css">
+    </head>
+    <body> 
+        <header class="header">
+            <div class="top">歡迎光臨，請輸入帳號密碼</div>
+        </header>
+        <main class="wrap">
+            <div class="frame">
+                <div class="item">註冊帳號</div>
+                <form action="/signup" class="former" method="POST">
+                    <label for="name">姓名  <input type="text" placeholder="請輸入姓名" id="name" name="name"></label>
+                    <label for="user">帳號  <input type="text" placeholder="請輸入帳號" id="user" name="user"></label>
+                    <label for="password">密碼  <input type="password" placeholder="請輸入密碼" id="password" name="password"></label>
+                    <label for="password">驗證  <input type="password" placeholder="請再次輸入密碼" id="validation" name="validation"></label>
+                    <button class="login" id="btn">註冊</button>
+                </form>
+            </div>
+            <hr class="dash">
+            <div class="frame">
+                <div class="item">登入系統</div>
+                <form action="/signin" class="former" method="POST">
+                    <label for="user">帳號  <input type="text" placeholder="請輸入帳號" id="user" name="user"></label>
+                    <label for="password">密碼  <input type="password" placeholder="請輸入密碼" id="password" name="password"></label>
+                    <button class="login" id="btn">登入</button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
