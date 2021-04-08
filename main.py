@@ -1,5 +1,6 @@
-from flask import Flask,request,render_template,redirect,session,url_for
+from flask import Flask,request,render_template,redirect,session,url_for,jsonify
 import mysql.connector
+import json
 
 app=Flask(__name__)
 app.secret_key=b'8$"\xf9.o\xa0e0Yg\xd7\xdd\xdb\xfc\xaf'
@@ -74,22 +75,19 @@ def error():
     return render_template("error.html",errorMessage=Message)
 
 #user資料API
-@app.route("/api/users")
+@app.route("/api/users/")
 def api():
     val=request.args.get("username")
     mycursor.execute("SELECT id,name,username From user where username=%s",(val,))
     DBuser=mycursor.fetchone()
     if DBuser==None:
         apiUsers["data"]=DBuser
-        return apiUsers
+        return jsonify(apiUsers)
     userID=DBuser[0]
     name=DBuser[1]
     userName=DBuser[2]
     apiUsers["data"]={"id":userID,"name":name,"username":userName}
-    return apiUsers
-    
-        
-    
+    return jsonify(apiUsers)
 
 if __name__=="__main__":
     app.run(port=3000)
