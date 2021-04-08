@@ -20,8 +20,7 @@
                     box.innerHTML=""
                     var newP=document.createElement("p");
                     var data = JSON.parse(this.responseText);
-                    newContent=data["data"]
-                    console.log(newContent);
+                    newContent=data["data"];
                     if (newContent == null){
                         newP.textContent="無此使用者"
                     }else{
