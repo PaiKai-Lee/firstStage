@@ -89,5 +89,30 @@ def api():
     apiUsers["data"]={"id":userID,"name":name,"username":userName}
     return jsonify(apiUsers)
 
+@app.route("/api/user", methods=["POST"])
+def update():
+    username=session["username"]
+    #取的舊姓名
+    mycursor.execute("SELECT name From user where username=%s",(username,))
+    DBuser=mycursor.fetchone()
+    oldname=DBuser[0]
+
+    #更新資料庫姓名
+    newname=request.get_json()["name"]
+    mycursor.execute("UPDATE user SET name=%s where username=%s",(newname,username))
+    mydb.commit()
+
+    #取得新姓名
+    mycursor.execute("SELECT name From user where username=%s",(username,))
+    DBuser=mycursor.fetchone()
+    DBname=DBuser[0]
+
+    #比較資料庫新舊姓名
+    if oldname != DBname:
+        session["name"]= DBname
+        return jsonify({"ok":True})
+    else:
+        return jsonify({"error":True})
+
 if __name__=="__main__":
-    app.run(port=3000)
+    app.run(port=3000,debug=True)

@@ -12,15 +12,14 @@
             var btn = document.getElementById("btnSrh");
             var inputuser = document.getElementById("userName");
             var box=document.getElementById("box");
-            var newContent;
             var loading=function(){
                 var req = new XMLHttpRequest();
                 req.open("GET",url+inputuser.value,true);
                 req.onload=function(){
                     box.innerHTML=""
-                    var newP=document.createElement("p");
-                    var data = JSON.parse(this.responseText);
-                    newContent=data["data"];
+                    let newP=document.createElement("p");
+                    let data = JSON.parse(this.responseText);
+                    let newContent=data["data"];
                     if (newContent == null){
                         newP.textContent="無此使用者"
                     }else{
@@ -31,6 +30,34 @@
                 req.send();
             }
             btn.addEventListener("click",loading);
+            // ----------------------------------------
+            // 更新姓名
+            let btnSubmit=document.getElementById("btnSubmit");
+            let valSubmit=function(){
+                let name = document.getElementById("name")
+                fetch("http://127.0.0.1:3000/api/user",{
+                    method: 'POST',
+                    headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({"name":name.value}),
+                }).then(function(response){
+                    return response.json();
+                }).then(function(result){
+                    let updateStatus=document.getElementById("updateStatus")
+                    let newP = document.createElement("p");
+                    let newuser = document.getElementById("newuser")
+                    if (Object.keys(result)=="ok"){
+                        updateStatus.innerHTML=""
+                        newP.textContent="更新成功";
+                        updateStatus.appendChild(newP);
+                        newuser.textContent=name.value;
+                    }else{
+                        updateStatus.innerHTML=""
+                        newP.textContent="重複 or 失敗";
+                        updateStatus.appendChild(newP);
+                    } 
+                })
+            }
+            btnSubmit.addEventListener("click",valSubmit);
         }    
         </script>    
     </head>
@@ -40,7 +67,7 @@
         </header>
         <main class="wrap">
             <div class="frame">
-                <div class="item">{{user}},歡迎登入系統</div>
+                <div class="item"><span id="newuser">{{user}}</span>,歡迎登入系統</div>
                 <a href="/signout">登出系統</a>
             </div>
             <h2>查詢會員姓名</h2>
@@ -51,9 +78,10 @@
             <div id="box"></div>
             <form class="renew">
                 <h2>更新我的姓名</h2>
-                <input type="text" placeholder="請輸入姓名" name="name">
-                <button type="submit" id="btnRenew">更新</button>
+                <input type="text" placeholder="請輸入姓名" name="name" id="name">
+                <button type="button" id="btnSubmit">更新</button>
             </form>
+            <div id="updateStatus"></div>
         </main>
     </body>
 </html>
